@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId + "\n");
+    console.log("Thank you for visiting Bamazon! What would you like to purchase from our inventory?" + "\n");
     start();
 });
 
@@ -47,10 +47,33 @@ function pickItemId(){
 
         }])
         .then(function(answer){
-            console.log("Choosen product by ID: " + answer.pickId);
-            console.log("Quantity choosen: " + answer.quantity);
-        })
-     
-           
-      connection.end()
+            var idPicked = answer.pickId;
+            var quantityPicked = answer.quantity;
+            
+            //console.log("Product ID: " + answer.pickId);
+            //console.log("Quantity chosen: " + answer.quantity);
+            
+            orderItems(idPicked, quantityPicked);
+        });              
 };
+
+function orderItems(pickId, quantityNeeded) {
+    
+    connection.query("SELECT * FROM products WHERE id = " + pickId, function(err, res) {
+        if (err) throw err;
+        if(quantityNeeded <= res[0].stock_quantity) {
+            var costTotal = res[0].price * quantityNeeded;
+            console.log("Your total cost is " + costTotal + ", for " + quantityNeeded + " " + res[0].product_name + "(s).");
+            console.log("------------------------------------------------------------------------------------------------------");
+            connection.query("UPDATE products SET stock_quantity = stock_quantity - " + quantityNeeded + " WHERE id = " + pickId);
+        }
+        else {
+            console.log("Sorry insufficient quantity or out of stock! Please change total quantity or product ID and try again.");
+            console.log("------------------------------------------------------------------------------------------------------");
+            //start();
+        }
+       start();    
+    });
+    
+};
+
