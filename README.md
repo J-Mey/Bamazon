@@ -29,9 +29,20 @@ Now you can run *node bamazonCustomer.js*. Running this application will first d
 
 Once the customer has placed the order, the application should check the inventory to make sure there is a sufficient quantity. If there is a sufficient quantity to purchase then the application will show the customer the total cost of their purchase while also updating the quantity in the database.
 
-![Node initial start](https://github.com/J-Mey/Bamazon/blob/master/images/node-purchase.JPG?raw=true)
+![Node purchase](https://github.com/J-Mey/Bamazon/blob/master/images/node-purchase.JPG?raw=true)
 
-![Node initial start](https://github.com/J-Mey/Bamazon/blob/master/images/node-finish.JPG?raw=true)
+![Node purchase](https://github.com/J-Mey/Bamazon/blob/master/images/node-finish.JPG?raw=true)
 
 If the customer enters an invalid quantity that exceeds what is in stock, then it console log an error stating `Sorry insufficient quantity or out of stock! Please change total quantity or product ID and try again.`
 
+![Node error](https://github.com/J-Mey/Bamazon/blob/master/images/node-error.JPG?raw=true)
+
+## Technologies used includes:
+
+* Node
+* mySQL
+* inquirer
+* cli-table
+* colors
+
+Jeremy Mey was the developer in this application
